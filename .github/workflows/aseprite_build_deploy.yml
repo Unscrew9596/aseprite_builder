@@ -68,7 +68,10 @@ jobs:
     steps:
       - name: (Windows) Install dependencies
         if: matrix.os == 'windows-latest'
-        uses: seanmiddleditch/gha-setup-ninja@v1
+        run: |
+          curl -LO https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-win.zip
+          unzip ninja-win.zip -d ninja-build
+          echo "ninja-build" >> $GITHUB_PATH
       - name: (Ubuntu) Install dependencies
         if: matrix.os == 'ubuntu-latest'
         run: sudo apt install -y cmake ninja-build libxcursor-dev libxi-dev libgl1-mesa-dev
